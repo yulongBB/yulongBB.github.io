@@ -1,8 +1,8 @@
 ---
 date: 2021-01-02T12:00:00-05:00
 description: "利用HUGO生成静态网站并使用Github Action快速部署静态网站到Github Pages"
-featured_image: "/images/使用Github Action部署静态网站.jpg"
-tags: ["HUGO", "GitHub Actions", "Github Page"]
+featured_image: "/images/使用Github Actions部署静态网站.jpg"
+tags: ["HUGO", "GitHub Actions", "Github Pages"]
 title: "使用Github Action部署静态网站"
 disable_share: true
 ---
