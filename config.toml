@@ -1,0 +1,10 @@
+baseURL = "http://example.org/"
+languageCode = "zh-CN"
+title = "玉龙BB"
+theme = "ananke"
+
+DefaultContentLanguage = "zh"
+SectionPagesMenu = "main"
+Paginate = 3
+googleAnalytics = ""
+enableRobotsTXT = true
