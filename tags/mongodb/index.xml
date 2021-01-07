@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>MongoDB on 大数据创新中心</title><link>https://yulongbb.github.io/tags/mongodb/</link><description>Recent content in MongoDB on 大数据创新中心</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sun, 03 Jan 2021 12:00:00 -0500</lastBuildDate><atom:link href="https://yulongbb.github.io/tags/mongodb/index.xml" rel="self" type="application/rss+xml"/><item><title>MongoDB副本集集群搭建</title><link>https://yulongbb.github.io/post/mongodb%E5%89%AF%E6%9C%AC%E9%9B%86%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/</link><pubDate>Sun, 03 Jan 2021 12:00:00 -0500</pubDate><guid>https://yulongbb.github.io/post/mongodb%E5%89%AF%E6%9C%AC%E9%9B%86%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/</guid><description>mongodb集群的副本集和sharding模式目前是用的最广的方案，通常这2种方案的选择通过数据量和并发数来权衡。在GB级别的基本上副本集方案可满足，TB级别或以上采用sharding模式，解决单机容量和单机并发能力。这两种既有自己的优势也有自己的缺点，比如sharding模式分片越多，性能自然下降越多。
+准备三台服务器
+192.168.101.100 192.168.101.101 192.168.101.102
+安装mongodb
+软件安装目录 /usr/program 软件安装包存放目录 /usr/setups
+上传安装包
+scp mongodb-linux-x86_64-rhel70-4.0.10.gz root@192.168.101.100:/usr/setups/ scp mongodb-linux-x86_64-rhel70-4.0.10.gz root@192.168.101.101:/usr/setups/ scp mongodb-linux-x86_64-rhel70-4.0.10.gz root@192.168.101.102:/usr/setups/
+解压 tar -xzvf mongodb-linux-x86_64-rhel70-4.0.10.gz
+移动安装目录
+mv mongodb-linux-x86_64-rhel70-4.0.10.gz /usr/program/mongodb
+上传配置文件 scp mongodb.conf root@192.168.101.100:/usr/program/mongodb/conf scp mongodb.conf root@192.168.101.101:/usr/program/mongodb/conf scp mongodb.conf root@192.168.101.102:/usr/program/mongodb/conf
+启动mongodb
+mkdir -p /usr/program/mongodb/data mkdir -p /usr/program/mongodb/log touch /usr/program/mongodb/log/mongodb.log
+lsof -i:27017
+./mongod -f /usr/program/mongodb/conf/mongodb.conf
+配置集群
+./mongo
+config = { _id: &amp;ldquo;mongors&amp;rdquo;, members: [ {_id: 0, host: &amp;ldquo;192.168.101.100:27017&amp;rdquo;, priority:2}, {_id: 2, host: &amp;ldquo;192.168.101.101::27017&amp;rdquo;, priority:1}, {_id: 1, host: &amp;ldquo;192.</description></item></channel></rss>
