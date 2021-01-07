@@ -7,19 +7,19 @@ title: "使用Github Actions部署静态网站"
 disable_share: true
 ---
 
-## Intros
+## 介绍
 
 [HUGO](https://gohugo.io/)是由Go语言实现的静态网站生成器。简单、易用、高效、易扩展、快速部署。
 
 [GitHub Actions](https://github.com/features/actions)是一个CI / CD工具，用于自动化GitHub中的测试，构建和部署过程。
 
-## Steps
+## 步骤
 
-### Step 1:创建GitHub仓库
+### 1:创建GitHub仓库
 
 创建创建GitHub仓库并命名为`<your GitHub username>.github.io`。
 
-### Step 2:安装HUGO并创建项目
+### 2:安装HUGO并创建项目
 
 在Window 10上安装HUGO需要在官方仓库的[releases](https://github.com/gohugoio/hugo/releases)页面下载最新版本HUGO的编译文件到本地并配置环境变量。
 
@@ -32,7 +32,7 @@ git clone --depth 1 --recursive https://github.com/gohugoio/hugoThemes.git theme
 hugo server -D
 ```
 
-### Step 3:将HUGO项目推送至GitHub仓库
+### 3:将HUGO项目推送至GitHub仓库
 
 ```shell
 # 初始化仓库
@@ -49,15 +49,15 @@ git remote add origin https://github.com/<your GitHub username>/<your GitHub use
 git push -u origin main
 ```
 
-### Step 4:创建GitHub的token
+### 4:创建GitHub的token
 
 在[https://github.com/settings/tokens](https://github.com/settings/tokens)页面生成token（勾选repo）并复制到粘贴板。
 
-### Step 5:将token添加到Github仓库密钥配置中
+### 5:将token添加到Github仓库密钥配置中
 
 在`<your GitHub username>.github.io`仓库的`Setting`->`Secrets`页面创建创库密钥`ACTIONS_DEPLOY_KEY`并把token粘贴到value中。
 
-### Step 6:创建GitHub Action配置文件
+### 6:创建GitHub Action配置文件
 
 在`<your GitHub username>.github.io`仓库创建`workflows/hugo.yml`配置文件。
 
@@ -98,16 +98,16 @@ jobs:
         #   cname: example.com
 ```
 
-## Step 7:在Github Pages访问部署的静态网站
+## 7:在Github Pages访问部署的静态网站
 
 `http://<your GitHub username>.github.io`
 
-## Links
+## 链接
 
 1. [Hgohugoio/hugo](https://github.com/gohugoio/hugo)
 
 2. [Hugo: Deploy Static Site using GitHub Actions](https://ruddra.com/hugo-deploy-static-page-using-github-actions/)
 
-## Sources
+## 资源
 
 [hugo_0.80.0_Windows-64bit](https://pan.baidu.com/s/1PKgRFJfWn50Q6MAo9lnxPA) 提取码：1111
