@@ -39,7 +39,34 @@ Replica Set 的成员是一堆有着同样的数据内容 mongod 的实例集合
 | 192.168.101.101  | Secondary |
 | 192.168.101.102  | Arbiter |
 
-### 2:在三台服务器上安装mongodb
+### 2:创建配置文件
+
+```yml
+systemLog:
+   destination: file
+   path: "/data/mongodb/log/mongodb.log"
+   logAppend: true
+storage:
+   dbPath: "/data/mongodb/data/"
+   journal:
+      enabled: true
+   wiredTiger:
+      engineConfig:
+         cacheSizeGB: 6
+replication:
+    oplogSizeMB: 10000
+    replSetName: "mongors"
+processManagement:
+   fork: true
+   pidFilePath: "/data/mongodb/mongodb.pid"
+net:
+   bindIp: 127.0.0.1,192.168.101.100,192.168.101.101,192.168.101.102
+   port: 27017
+setParameter:
+   enableLocalhostAuthBypass: false
+```
+
+### 3:在三台服务器上安装mongodb
 
 ```shell
 # 创建安装目录
@@ -66,7 +93,7 @@ touch /usr/program/mongodb/log/mongodb.log
 lsof -i:27017
 ```
 
-### 3:在主节点配置集群
+### 4:在主节点配置集群
 
 ```shell
 # 进入mongo命令行
@@ -98,7 +125,42 @@ lsof -i:27017
 > db.shutdownServer()   
 ```
 
-### 3:添加或更换节点
+### 5:添加或更换节点
+
+```shell
+# 进入mongo命令行
+./mongo
+# 用户认证
+> use admin
+> db.auth('<your username>','<your password>')
+# 添加新节点
+> rs.add("<new IP>:27017")
+# 确认复制集的oplog状态
+> rs.printReplicationInfo()
+# 删除旧节点
+> rs.remove("<old IP>:27017")
+# 查看配置状态
+> rs.status()
+```
+
+### 6. 副本集的定时备份与恢复
+
+备份
+
+```shell
+folder=`date +%Y%m%d`
+mongodump -h 'mongors/<primary IP>:27017,<secondary IP>:27017' -u '<your username>' -p '<your password>' --oplog --gzip -o mongodb/dump/$folder --authenticationDatabase admin
+```
+
+恢复备份
+
+```shell
+./mongorestore -h 'mongors/<primary IP>:27017,<secondary IP>:27017' -u '<your username>' -p '<your password>' --oplogReplay --gzip /data/mongodb/dump/<folder>
+```
+
+设置定时
+
+使用crontab定时备份
 
 ## 链接
 
