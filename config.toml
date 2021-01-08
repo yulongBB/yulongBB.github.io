@@ -1,10 +1,18 @@
+# 域名
 baseURL = "https://yulongbb.cn/"
+# 语言
 languageCode = "zh-CN"
+DefaultContentLanguage = "zh"
+# 标题
 title = "大数据创新中心"
+# 摘要长度
+summaryLength = 5 #
+# 主题
 theme = "ananke"
 
-DefaultContentLanguage = "zh"
 SectionPagesMenu = "main"
 Paginate = 3
 googleAnalytics = ""
 enableRobotsTXT = true
+
+
