@@ -11,7 +11,7 @@ summaryLength = 5 #
 theme = "ananke"
 
 SectionPagesMenu = "main"
-Paginate = 3
+Paginate = 10
 googleAnalytics = ""
 enableRobotsTXT = true
 
