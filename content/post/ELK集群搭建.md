@@ -126,7 +126,7 @@ tar -xzvf kibana-6.6.2-linux-x86_64.tar.gz
 mv kibana-6.6.2-linux-x86_64 /usr/program/
 ```
 
-### 5: 修改配置
+### 6: 修改配置
 
 ```yaml
 server.port: 5601
@@ -134,10 +134,81 @@ server.host: "0.0.0.0"
 elasticsearch.hosts: ["http://192.168.101.103:9200", "http://192.168.101.104:9200", "http://192.168.101.105:9200"]
 ```
 
-### 6: 启动
+### 7: 启动
 
 ```shell
 nohup ./bin/kibana
+```
+
+### 8: 安装Logstash
+
+```shell
+# 上传文件到服务器
+scp logstash-6.6.2.tar.gz root@192.168.101.103:/usr/setups/
+# 解压
+tar -xzvf logstash-6.6.2.tar.gz
+# 移动安装目录
+mv logstash-6.6.2 /usr/program/
+```
+
+### 9: 测试Logstash是否安装成功
+
+```shell
+bin/logstash -e 'input { stdin { } } output { stdout {} }'
+```
+
+### 10: 配置logstash输出到elasticsearch
+
+```conf
+input {
+  beats {
+    port => 5044
+  }
+}
+
+output {
+  elasticsearch {
+    hosts => ["http://192.168.101.103:9200", "http://192.168.101.104:9200", "http://192.168.101.105:9200"]
+    index => "%{[@metadata][beat]}-%{[@metadata][version]}-%{+YYYY.MM.dd}"
+  }
+}
+```
+
+### 11: 启动
+
+```shell
+./bin/logstash -f config/logstash-sample.conf >logstash.log  2>&1 &
+```
+
+### 12：安装Filebeat
+
+```shell
+# 上传文件到服务器
+scp filebeat-6.6.2-linux-x86_64.tar.gz root@192.168.101.91:/usr/setups/
+# 解压
+tar -xzvf filebeat-6.6.2-linux-x86_64.tar.gz
+# 移动安装目录
+mv filebeat-6.6.2-linux-x86_64 /usr/program/
+```
+
+### 13: 修改配置文件
+
+```yaml
+#=========================== Filebeat inputs =============================
+- type: log
+  enabled: true
+  paths:
+    - /var/log/kgms/*.log
+#================================ Outputs =====================================
+#----------------------------- Logstash output --------------------------------
+output.logstash:
+  hosts: ["192.168.101.103:5044"]
+```
+
+### 14: 启动
+
+```shell
+sudo ./filebeat -e >filebeat.log 2>&1 &
 ```
 
 ## 链接
@@ -145,3 +216,13 @@ nohup ./bin/kibana
 [ElasticSearch 7.8.1集群搭建](https://www.cnblogs.com/chenyanbin/p/13493920.html)
 
 [Elasticsearch安装、集群搭建、kibana安装](https://blog.csdn.net/weixin_41947378/article/details/109384397)
+
+## 资源
+
+[kibana-6.6.2-linux-x86_64.tar](https://pan.baidu.com/s/1Z_fxdw7y9r5dXCv6K3K5VQ) 提取码：1111
+
+[elasticsearch-6.6.2.tar](https://pan.baidu.com/s/126nVsnY0XorU6cO9aJZsCg) 提取码：1111
+
+[logstash-6.6.2.tar](https://pan.baidu.com/s/1r6TaB6g3Ly55_vm5FmNfmQ) 提取码：1111
+
+[filebeat-6.6.2-linux-x86_64.tar](https://pan.baidu.com/s/1qR-c5a7l0XjaRseX7POmDA) 提取码：1111
