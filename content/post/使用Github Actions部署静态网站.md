@@ -95,7 +95,7 @@ jobs:
           user_name: <your GitHub username>
           user_email: <your GitHub email>
           publish_branch: gh-pages
-        #   cname: example.com
+          cname: yulongbb.cn
 ```
 
 ## 7:在Github Pages访问部署的静态网站
