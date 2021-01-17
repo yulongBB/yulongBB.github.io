@@ -31,4 +31,4 @@ jobs:
           user_name: yulongbb
           user_email: sunyulongbb@gmail.com
           publish_branch: gh-pages
-        #   cname: example.com
+          cname: yulongbb.cn
