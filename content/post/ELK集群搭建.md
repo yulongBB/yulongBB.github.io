@@ -4,6 +4,7 @@ description: "使用ElasticSearch+Logstash+Kibana搭建分布式数据管理分�
 featured_image: "/images/ELK集群搭建.png"
 tags: ["ElasticSearch", "Logstash", "Kibana"]
 title: "ELK集群搭建"
+author: "玉龙BB"
 disable_share: true
 ---
 

@@ -4,6 +4,7 @@ description: "在三台虚拟机上演示MongoDB集群搭建过程"
 featured_image: "/images/MongoDB副本集集群搭建.png"
 tags: ["MongoDB"]
 title: "MongoDB副本集Replica Set集群搭建"
+author: "玉龙BB"
 disable_share: true
 ---
 

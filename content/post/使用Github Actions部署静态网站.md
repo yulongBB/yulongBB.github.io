@@ -4,6 +4,7 @@ description: "利用HUGO生成静态网站并使用Github Actions快速部署静
 featured_image: "/images/使用Github Actions部署静态网站.jpg"
 tags: ["HUGO", "GitHub Actions", "Github Pages"]
 title: "使用Github Actions部署静态网站"
+author: "玉龙BB"
 disable_share: true
 ---
 

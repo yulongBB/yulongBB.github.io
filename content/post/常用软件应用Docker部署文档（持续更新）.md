@@ -4,6 +4,7 @@ description: "常用软件应用Docker部署文档（持续更新）"
 featured_image: "/images/常用软件应用Docker部署文档（持续更新）.png"
 tags: []
 title: "常用软件应用Docker部署文档（持续更新）"
+author: "玉龙BB"
 disable_share: true
 ---
 

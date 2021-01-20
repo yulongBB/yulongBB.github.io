@@ -3,6 +3,7 @@ title: "Docker部署MongoDB副本集"
 date: 2021-01-17T15:39:26+08:00
 description: "使用docker技术在容器中部署MongoDB副本集"
 featured_image: "/images/Docker部署MongoDB副本集.png"
+author: "玉龙BB"
 disable_share: true
 ---
 
