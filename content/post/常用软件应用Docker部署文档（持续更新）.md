@@ -11,9 +11,17 @@ disable_share: true
 
 开源Web服务器和反向代理服务器
 
-1. 拉取镜像`docker pull nginx`
+1. 拉取镜像
 
-2. 创建 Nginx 容器 `docker run -di --name nginx -p 80:80 nginx`
+   ```shell
+   docker pull nginx
+   ```
+
+2. 创建 Nginx 容器
+
+   ```shell
+   docker run -di --name nginx -p 80:80 nginx
+   ```
 
 3. 将容器内的配置文件拷贝到指定目录
 
@@ -36,3 +44,20 @@ disable_share: true
    ```shell
    docker run -di --name nginx -p 80:80 -v  /usr/loacl/nginx:/etc/nginx nginx
    ```
+
+## MySQL
+
+关系型数据库
+
+1. 拉取镜像 `docker pull mysql:8.0.21`
+
+2. 创建容器 `docker run -di --name mysql -p 3306:3306 -v /usr/docker/mysql/conf:/etc/mysql/conf.d -v /usr/docker/mysql/data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=<your password> mysql:8.0.21`
+
+3. 进入容器并连接客户端
+
+```shell
+# 进入容器
+docker exec -it mysql /bin/bash
+# 使用 MySQL 命令打开客户端
+mysql -uroot -p<your password> --default-character-set=utf8
+```
