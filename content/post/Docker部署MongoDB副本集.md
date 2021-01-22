@@ -24,6 +24,7 @@ docker run -dit -p 30003:27017 --name mongo3 --net my-mongo-cluster mongo mongod
 ```
 
 ### 3:配置副本集
+
 ```shell
 docker exec -it mongo1 mongo
 > db = (new Mongo('localhost:27017')).getDB('test')
@@ -50,7 +51,6 @@ test
 
 ### 4: 测试副本集是否工作
 
-
 ```shell
 # 在主节点插入数据
 > db.mycollection.insert({name : 'sample'})
@@ -63,7 +63,6 @@ WriteResult({ "nInserted" : 1 })
 > db2.mycollection.find()
 { "_id" : ObjectId("6003ece416a4633b9565260d"), "name" : "sample" }
 ```
-
 
 ## 总结
 
@@ -91,4 +90,3 @@ rs.initiate(config)
 # connection URI
 mongodb://localhost:27017,localhost:27018,localhost:27019/{db}?replicaSet=my-mongo-set
 ```
-
